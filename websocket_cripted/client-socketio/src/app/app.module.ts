@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-import { AppRoutingModule } from './app-routing.module';
+import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';  //libreria importata
 import { SocketService } from './socket.service';
 import { CesarService } from './cesar.service';
+import { CryptoService } from './crypto.service';
+import { FormsModule } from '@angular/forms';
 
 const config: SocketIoConfig = { url: 'https://3000-coffee-iguana-f2lyeove.ws-eu03.gitpod.io/', options: {} };
 
@@ -14,10 +15,10 @@ const config: SocketIoConfig = { url: 'https://3000-coffee-iguana-f2lyeove.ws-eu
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    FormsModule
   ],
-  providers: [SocketService, CesarService],
+  providers: [SocketService, CesarService, CryptoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,36 @@
+<div>
+  <input (keyup)="$event.keyCode == 13 && setEncryptionKey(encKey)" #encKey />
+  <button (click)="setEncryptionKey(encKey)">Set Encryption Key</button>
+  encryption key: {{encryptionKey}}
+</div>
 
-<input  (keyup)="$event.keyCode == 13 && sendMessage(message)" #message/>
-<button (click)="sendMessage(message)">Send Message</button>
+<hr>
 
-<div *ngFor = "let message of messageList">
+<!--Questa form usa dei radio button con i template driven form di Angular per scegliere l'algoritmo di cifratura-->
+<form #myForm="ngForm" (submit)="sendMessage(myForm.value)" novalidate>
+  <div>
+    <input id="cesar" type="radio" value="cesar" name="messageType" ngModel>
+    <label  for="cesar">Cesar</label>
+  </div>
+
+  <div>
+    <input id="t-des" type="radio" value="t-des" name="messageType" ngModel>
+    <label for="t-des">Triple Des</label>
+  </div>
+
+  <div>
+    <input id="aes" type="radio" value="aes" name="messageType" ngModel>
+    <label for="aes">AES</label>
+  </div>
+
+  <input type="text" id="message"  [(ngModel)]="message" name="message">
+
+  <button type="submit" >Encrypt</button>
+</form><!-- Form ends -->
+
+ <hr>
+
+<div *ngFor="let message of messageList">
   {{message}}
 </div>
 
